@@ -29,7 +29,6 @@ void		ft_print_symbols(t_symbols *env)
 	t_symbols	*tmp;
 
 	tmp = env;
-	ft_printf("COUCOU 1");
 	while (tmp && tmp->name != NULL)
 	{
 		ft_printf("COUCOU 2");
