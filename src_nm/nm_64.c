@@ -6,7 +6,7 @@
 /*   By: jschotte <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/14 14:55:38 by jschotte          #+#    #+#             */
-/*   Updated: 2017/03/21 10:56:55 by jschotte         ###   ########.fr       */
+/*   Updated: 2017/03/21 12:43:33 by jschotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ char	*ft_get_value(int value)
 		return (ft_strdup(""));
 }
 
-void	ft_print(int nsyms, int symoff, int stroff, char *ptr, t_symbols *env)
+void	ft_print(int nsyms, int symoff, int stroff, char *ptr, t_symbols **env)
 {
 	int				i;
 	char			*stringtable;
@@ -56,12 +56,11 @@ void	ft_print(int nsyms, int symoff, int stroff, char *ptr, t_symbols *env)
 		new = ft_create_elem(ft_strdup(stringtable + array[i].n_un.n_strx),
 				ft_get_value(array[i].n_value), ft_get_type(array[i].n_type - 1));
 		ft_pushback(env, new);
-		ft_printf("%016s %c %s\n", new->hexvalue, new->type, new->name);
 		i++;
 	}
 }
 
-void	ft_nm_64(char *ptr, t_symbols *env)
+void	ft_nm_64(char *ptr, t_symbols **env)
 {
 	int						ncmds;
 	int						i;

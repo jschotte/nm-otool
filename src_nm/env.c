@@ -6,7 +6,7 @@
 /*   By: jschotte <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/20 13:18:52 by jschotte          #+#    #+#             */
-/*   Updated: 2017/03/21 11:06:32 by jschotte         ###   ########.fr       */
+/*   Updated: 2017/03/21 12:57:53 by jschotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,10 @@ void		ft_print_symbols(t_symbols *env)
 	tmp = env;
 	while (tmp && tmp->name != NULL)
 	{
-		ft_printf("COUCOU 2");
-		ft_printf("%s %c %s\n", env->hexvalue, env->type, env->name);
+		if (ft_strcmp(tmp->hexvalue, "") != 0 )
+			ft_printf("%016s %c %s\n", tmp->hexvalue, tmp->type, tmp->name);
+		else
+			ft_printf("%17 %c %s\n", tmp->type, tmp->name);
 		tmp = tmp->next;
 	}
 }
@@ -49,11 +51,49 @@ t_symbols	*ft_create_elem(char *name, char *value, char c)
 	return (new);
 }
 
-void		ft_pushback(t_symbols *env, t_symbols *new)
+void	ft_swaplist(t_symbols *l1, t_symbols *l2)
 {
-	if (env->name == NULL)
+	char	*name;
+	char	*value;
+	char	c;
+
+	name = l1->name;
+	value = l1->hexvalue;
+	c = l1->type;
+	l1->name = l2->name;
+	l1->hexvalue = l2->hexvalue;
+	l1->type = l2->type;
+	l2->name = name;
+	l2->hexvalue = value;
+	l2->type = c;
+}
+
+t_symbols	*ft_sort_list(t_symbols *lst)
+{
+	t_symbols *temp;
+
+	temp = lst;
+	while (lst != NULL && lst->next != NULL)
 	{
-		env = new;
+		if (ft_strcmp(lst->name, lst->next->name) > 0)
+		{
+			ft_swaplist(lst, lst->next);
+			lst = temp;
+		}
+		else
+			lst = lst->next;
+	}
+	return (temp);
+}
+
+void		ft_pushback(t_symbols **env, t_symbols *new)
+{
+	if (!((*env)->name))
+		*env = new;
+	else
+	{
+		new->next = *env;
+		*env = new;
 	}
 }
 
