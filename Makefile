@@ -6,17 +6,17 @@
 #    By: jschotte <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/24 10:08:32 by jschotte          #+#    #+#              #
-#    Updated: 2017/03/20 13:20:04 by jschotte         ###   ########.fr        #
+#    Updated: 2017/03/23 12:17:01 by jschotte         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME_NM = ft_nm
 NAME_OTOOL = ft_otool
 
-SRC_NM = src_nm/nm.c src_nm/nm_64.c src_nm/env.c
+SRC_NM = src_nm/nm.c  src_nm/nm_64.c src_nm/nm_32.c src_nm/env.c
 #SRC2_OTOOL = Grace.c
 
-OBJ_NM = nm.o nm_64.o env.o
+OBJ_NM = nm.o nm_64.o env.o nm_32.o
 #OBJ = $(SRC:.c=.o)
 
 FLAGS = -Wall -Wextra -Werror

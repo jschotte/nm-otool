@@ -6,16 +6,29 @@
 /*   By: jschotte <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/14 14:55:38 by jschotte          #+#    #+#             */
-/*   Updated: 2017/03/21 12:43:33 by jschotte         ###   ########.fr       */
+/*   Updated: 2017/03/23 14:17:11 by jschotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/nm.h"
 
-char	ft_get_type(int value)
+char	ft_get_type(int value, int sect)
 {
+	//printf(" %d %d\n", value, sect);
 	if (value == N_SECT)
-		return ('T');
+	{
+		if (sect == 1)
+			return ('T');
+		else
+			return ('S');
+	}
+	else if (value == N_SECT - 1)
+	{
+		if (sect == 1)
+			return ('t');
+		else
+			return ('d');
+	}
 	else if (value == N_UNDF)
 		return ('U');
 	else if (value == N_ABS)
@@ -24,11 +37,13 @@ char	ft_get_type(int value)
 		return ('P');
 	else if (value == N_INDR)
 		return ('I');
+	else if (sect == N_STAB)
+		return ('X');
 	else
 		return (' ');
 }
 
-char	*ft_get_value(int value)
+char	*ft_get_value(long long value)
 {
 	char	*hex;
 
@@ -53,8 +68,10 @@ void	ft_print(int nsyms, int symoff, int stroff, char *ptr, t_symbols **env)
 	i = 0;
 	while (i < nsyms)
 	{
+		//printf("%s", stringtable + array[i].n_un.n_strx);
 		new = ft_create_elem(ft_strdup(stringtable + array[i].n_un.n_strx),
-				ft_get_value(array[i].n_value), ft_get_type(array[i].n_type - 1));
+				ft_get_value(array[i].n_value), ft_get_type(array[i].n_type - 1,
+					array[i].n_sect));
 		ft_pushback(env, new);
 		i++;
 	}

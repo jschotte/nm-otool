@@ -6,7 +6,7 @@
 /*   By: jschotte <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/20 13:18:52 by jschotte          #+#    #+#             */
-/*   Updated: 2017/03/21 12:57:53 by jschotte         ###   ########.fr       */
+/*   Updated: 2017/03/23 14:17:04 by jschotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,13 @@ void		ft_print_symbols(t_symbols *env)
 	tmp = env;
 	while (tmp && tmp->name != NULL)
 	{
-		if (ft_strcmp(tmp->hexvalue, "") != 0 )
-			ft_printf("%016s %c %s\n", tmp->hexvalue, tmp->type, tmp->name);
-		else
-			ft_printf("%17 %c %s\n", tmp->type, tmp->name);
+		if (ft_strcmp(tmp->name, "radr://5614542") != 0 && tmp->type != ' ')
+		{
+			if (ft_strcmp(tmp->hexvalue, "") != 0 || tmp->type == 'T')
+				ft_printf("%016s %c %s\n", tmp->hexvalue, tmp->type, tmp->name);
+			else
+				ft_printf("%17 %c %s\n", tmp->type, tmp->name);
+		}
 		tmp = tmp->next;
 	}
 }

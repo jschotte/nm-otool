@@ -6,16 +6,16 @@
 /*   By: jschotte <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/10 16:34:16 by jschotte          #+#    #+#             */
-/*   Updated: 2017/03/20 12:33:59 by jschotte         ###   ########.fr       */
+/*   Updated: 2017/03/21 14:45:35 by jschotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include "libft.h"
 
-
-char	*ft_convert(char *str, int nb, int b)
+char	*ft_convert(char *str, long long nb, int b)
 {
-	int i;
+	long long i;
 	int j;
 	static char letter[16] = {"0123456789abcdef"};
 	
@@ -40,27 +40,10 @@ char	*ft_convert(char *str, int nb, int b)
 	return (str);
 }
 
-char 	*ft_strdup(char *src)
+char	*ft_itoa_base_str(long long value, int base)
 {
 	int i;
-	char *str;
-
-	str = (char*)malloc(sizeof(str) * 12);
-	i = 0;
-	while (src[i])
-	{
-		str[i] = src[i];
-		i++;
-	}
-	str[i] = '\0';
-	return (str);
-
-}
-
-char	*ft_itoa_base_str(int value, int base)
-{
-	int i;
-	int j;
+	long long j;
 	char *str;
 
 	if (value == -2147483648)

@@ -6,7 +6,7 @@
 /*   By: jschotte <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/11/24 15:27:04 by jschotte          #+#    #+#             */
-/*   Updated: 2017/03/20 11:29:25 by jschotte         ###   ########.fr       */
+/*   Updated: 2017/03/21 14:39:26 by jschotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,6 @@ void	ft_putnbr_fd(int n, int fd);
 int		ft_abs(int n);
 char	*ft_freejoin(char *s1, char *s2);
 int		ft_printf(char *format, ...);
-char	*ft_itoa_base_str(int value, int base);
+char	*ft_itoa_base_str(long long value, int base);
 
 #endif

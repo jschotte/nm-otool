@@ -6,7 +6,7 @@
 /*   By: jschotte <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/13 14:50:12 by jschotte          #+#    #+#             */
-/*   Updated: 2017/03/21 12:54:16 by jschotte         ###   ########.fr       */
+/*   Updated: 2017/03/23 12:07:50 by jschotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ void	ft_nm(char *ptr)
 	magic_number = *(int *)ptr;
 	if (magic_number == MH_MAGIC_64)
 		ft_nm_64(ptr, &env);
+	else if (magic_number == MH_MAGIC)
+		ft_nm_32(ptr, &env);
 	else
 		ft_error("Not a valid file");
 	env = ft_sort_list(env);
