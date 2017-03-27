@@ -6,7 +6,7 @@
 /*   By: jschotte <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/20 13:18:52 by jschotte          #+#    #+#             */
-/*   Updated: 2017/03/27 13:51:27 by jschotte         ###   ########.fr       */
+/*   Updated: 2017/03/27 16:28:36 by jschotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,9 @@ void		ft_print_symbols(t_symbols *env)
 	tmp = env;
 	while (tmp && tmp->name != NULL)
 	{
-		if (ft_strcmp(tmp->name, "radr://5614542") != 0 && tmp->type != ' ')
+		if (ft_strcmp(tmp->name, "radr://5614542") != 0
+				&& ft_strcmp(tmp->name, "") != 0
+				&& tmp->type != ' ')
 		{
 			if (ft_strchr(tmp->hexvalue, ' ') != NULL
 						&& tmp->type == 'T')
@@ -90,14 +92,31 @@ t_symbols	*ft_sort_list(t_symbols *lst)
 	return (temp);
 }
 
+int			ft_already_in(t_symbols **env, char *str)
+{
+	t_symbols *tmp;
+
+	tmp = *env;
+	while (tmp)
+	{
+		if (ft_strcmp(tmp->name, str) == 0)
+			return (1);
+		tmp = tmp->next;
+	}
+	return (0);
+}
+
 void		ft_pushback(t_symbols **env, t_symbols *new)
 {
 	if (!((*env)->name))
 		*env = new;
 	else
 	{
-		new->next = *env;
-		*env = new;
+		if (ft_already_in(env, new->name) == 0)
+		{
+			new->next = *env;
+			*env = new;
+		}
 	}
 }
 

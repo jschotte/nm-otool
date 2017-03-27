@@ -6,7 +6,7 @@
 /*   By: jschotte <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/14 14:55:38 by jschotte          #+#    #+#             */
-/*   Updated: 2017/03/27 13:51:46 by jschotte         ###   ########.fr       */
+/*   Updated: 2017/03/27 17:58:38 by jschotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	ft_print_32(int nsyms, int symoff, int stroff, char *ptr, t_symbols **env)
 	i = 0;
 	while (i < nsyms)
 	{
+		//ft_printf("%s", stringtable + array[i].n_un.n_strx);
 		new = ft_create_elem(ft_strdup(stringtable + array[i].n_un.n_strx),
 				ft_get_value(array[i].n_value, 8), ft_get_type(array[i].n_type - 1,
 					array[i].n_sect));

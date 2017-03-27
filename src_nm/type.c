@@ -6,7 +6,7 @@
 /*   By: jschotte <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/14 14:55:38 by jschotte          #+#    #+#             */
-/*   Updated: 2017/03/27 11:31:18 by jschotte         ###   ########.fr       */
+/*   Updated: 2017/03/27 17:58:24 by jschotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 char	ft_get_type(int value, int sect)
 {
-	//printf(" %d %d\n", value, sect);
+	//ft_printf(" %d %d\n", value, sect);
 	if (value == N_SECT)
 	{
 		if (sect == 1)
@@ -22,7 +22,7 @@ char	ft_get_type(int value, int sect)
 		else
 			return ('S');
 	}
-	else if (value == N_SECT - 1)
+	else if (value == N_SECT - 1 || value == 35)
 	{
 		if (sect == 1)
 			return ('t');
@@ -39,6 +39,8 @@ char	ft_get_type(int value, int sect)
 		return ('I');
 	else if (sect == N_STAB)
 		return ('X');
+	else if (value == 37 && sect == 14)
+		return ('b');
 	else
 		return (' ');
 }

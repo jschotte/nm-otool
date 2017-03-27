@@ -6,7 +6,7 @@
 /*   By: jschotte <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/06 20:52:52 by jschotte          #+#    #+#             */
-/*   Updated: 2017/03/27 14:51:08 by jschotte         ###   ########.fr       */
+/*   Updated: 2017/03/14 11:48:13 by jschotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include <stdarg.h>
 # include <unistd.h>
 # include <stdlib.h>
-# include <inttypes.h>
 
 typedef struct	s_env
 {
