@@ -6,7 +6,7 @@
 /*   By: jschotte <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/13 14:50:12 by jschotte          #+#    #+#             */
-/*   Updated: 2017/03/23 12:07:50 by jschotte         ###   ########.fr       */
+/*   Updated: 2017/03/25 15:48:52 by jschotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	ft_nm(char *ptr)
 	else if (magic_number == MH_MAGIC)
 		ft_nm_32(ptr, &env);
 	else
-		ft_error("Not a valid file");
+		ft_error("The file was not recognized as a valid object file.");
 	env = ft_sort_list(env);
 	ft_print_symbols(env);
 	free(env);

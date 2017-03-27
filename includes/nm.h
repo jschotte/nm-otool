@@ -6,7 +6,7 @@
 /*   By: jschotte <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/13 14:51:08 by jschotte          #+#    #+#             */
-/*   Updated: 2017/03/23 12:07:11 by jschotte         ###   ########.fr       */
+/*   Updated: 2017/03/27 12:44:59 by jschotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ typedef struct	s_symbols
 void		ft_nm_64(char *ptr, t_symbols **env);
 void		ft_nm_32(char *ptr, t_symbols **env);
 
+char		*ft_get_value(long long value, int nb);
+char		ft_get_type(int value, int sect);
 void		ft_print_symbols(t_symbols *env);
 t_symbols	*ft_init_env();
 t_symbols	*ft_create_elem(char *name, char *value, char c);
