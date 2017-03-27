@@ -6,7 +6,7 @@
 #    By: jschotte <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/24 10:08:32 by jschotte          #+#    #+#              #
-#    Updated: 2017/03/20 11:30:38 by jschotte         ###   ########.fr        #
+#    Updated: 2017/03/27 14:45:08 by jschotte         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,7 +37,8 @@ OBJ = ft_memset.o ft_bzero.o ft_memcpy.o ft_memccpy.o ft_memmove.o \
 	ft_putendl_fd.o ft_putnbr_fd.o ft_abs.o ft_freejoin.o ft_itoa_base_str.o
 
 $(NAME):
-		 @gcc -Wall -Wextra -Werror -c $(SRC)	
+		 @gcc -c $(SRC)	
+		 #@gcc -Wall -Wextra -Werror -c $(SRC)	
 	 	 @make -C printf/
 		 @cp printf/libft.a ./$(NAME)
 	     @ar rc $(NAME) $(OBJ)

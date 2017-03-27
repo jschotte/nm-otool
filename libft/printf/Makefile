@@ -6,7 +6,7 @@
 #    By:  jschotte<marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2016/02/06 20:29:39 by jschotte          #+#    #+#              #
-#    Updated: 2017/03/14 11:50:16 by jschotte         ###   ########.fr        #
+#    Updated: 2017/03/27 14:45:34 by jschotte         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,8 @@ CFLAGS = -Wall -Wextra -Werror
 RM = rm -f
 
 $(NAME):
-	@$(CC) -c $(CFLAGS) $(SRC)
+	#@$(CC) -c $(CFLAGS) $(SRC)
+	@$(CC) -c $(SRC)
 	@ar rc $(NAME) $(OBJ)
 	@ranlib $(NAME)
 
