@@ -32,6 +32,7 @@
          U .objc_class_name_VMUCallTreeRoot
          U .objc_class_name_VMUDebugTimer
          U .objc_class_name_VMUObjectIdentifier
+0000f1ec S .objc_class_name_VMUOptionParser
          U .objc_class_name_VMUProcInfo
          U .objc_class_name_VMUProcessDescription
          U .objc_class_name_VMURangeArray
@@ -93,8 +94,39 @@
          U ___CFConstantStringClassReference
 00007ee9 t ___VMUOptionParserRegisterFlag_block_invoke
 0000a276 t ____request_port_from_parent_block_invoke
+0000e2b0 s ___block_descriptor_tmp
+0000e500 s ___block_descriptor_tmp
+0000e520 s ___block_descriptor_tmp
+0000e578 s ___block_descriptor_tmp105
+0000e470 s ___block_descriptor_tmp106
+0000e5a0 s ___block_descriptor_tmp109
+0000e490 s ___block_descriptor_tmp168
+0000e4a8 s ___block_descriptor_tmp218
+0000e4c0 s ___block_descriptor_tmp229
+0000e2d0 s ___block_descriptor_tmp28
+0000e4e0 s ___block_descriptor_tmp295
+0000e2f0 s ___block_descriptor_tmp33
+0000e310 s ___block_descriptor_tmp38
+0000e330 s ___block_descriptor_tmp43
+0000e350 s ___block_descriptor_tmp49
+0000e370 s ___block_descriptor_tmp55
+0000e390 s ___block_descriptor_tmp60
+0000e530 s ___block_descriptor_tmp62
+0000e3b0 s ___block_descriptor_tmp65
+0000e540 s ___block_descriptor_tmp65
+0000e550 s ___block_descriptor_tmp67
+0000e3d0 s ___block_descriptor_tmp70
+0000e3f0 s ___block_descriptor_tmp75
+0000e410 s ___block_descriptor_tmp80
+0000e430 s ___block_descriptor_tmp85
+0000e448 s ___block_descriptor_tmp94
+0000e458 s ___block_literal_global
+0000e560 s ___block_literal_global
+0000e588 s ___block_literal_global106
          U ___bzero
 000033d7 t ___copy_helper_block_
+00007f00 t ___copy_helper_block_
+0000a2c7 t ___copy_helper_block_
 00003a3e t ___copy_helper_block_103
 00004dd0 t ___copy_helper_block_165
 0000628d t ___copy_helper_block_226
@@ -111,8 +143,11 @@
 000037bf t ___copy_helper_block_73
 0000381d t ___copy_helper_block_78
 0000387b t ___copy_helper_block_83
+0000e9b8 s ___crashreporter_info__
 00004ff5 t ___debugMallocStackLogging_block_invoke
 00003402 t ___destroy_helper_block_
+00007f2b t ___destroy_helper_block_
+0000a2f2 t ___destroy_helper_block_
 00003a87 t ___destroy_helper_block_104
 00004e9b t ___destroy_helper_block_166
 000062b8 t ___destroy_helper_block_227
@@ -176,6 +211,7 @@
          U _asprintf
          U _atoi
 0000ab86 t _backtraceLocationForIndex
+0000e9c0 s _backtracesContained
          U _calloc
          U _closedir$UNIX2003
 0000a4a2 t _create_uniquing_table
@@ -236,8 +272,11 @@
          U _malloc
 000062d9 t _mallocBlockStackIdentifierRecorder
 0000e9c4 b _mallocHistoryMode
+0000dd58 s _malloc_historyVersionNumber
+0000dd18 s _malloc_historyVersionString
          U _memchr
          U _memcpy
+0000e9bc s _nodesFull
          U _objc_enumerationMutation
          U _objc_exception_extract
          U _objc_exception_match
