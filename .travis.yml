@@ -1,7 +1,0 @@
-language: c
-compiler: gcc
-sudo: false # only for faster builds
-script:
-      - make re
-
-
