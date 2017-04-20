@@ -6,7 +6,7 @@
 /*   By: jschotte <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/10 16:34:16 by jschotte          #+#    #+#             */
-/*   Updated: 2017/03/27 17:46:44 by jschotte         ###   ########.fr       */
+/*   Updated: 2017/03/30 08:49:41 by jschotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 
 char	*ft_convert(char *str, long long nb, int b)
 {
-	long long i;
-	int j;
-	static char letter[16] = {"0123456789abcdef"};
-	
+	long long	i;
+	int			j;
+	static char	letter[16] = {"0123456789abcdef"};
+
 	j = 0;
 	if (nb < 0 && b == 10)
 	{
@@ -42,9 +42,9 @@ char	*ft_convert(char *str, long long nb, int b)
 
 char	*ft_itoa_base_str(long long value, int base)
 {
-	int i;
-	long long j;
-	char *str;
+	int			i;
+	long long	j;
+	char		*str;
 
 	if (value == -2147483648)
 		return (ft_strdup("-2147483648"));
@@ -56,6 +56,8 @@ char	*ft_itoa_base_str(long long value, int base)
 		i++;
 	}
 	str = (char*)malloc(sizeof(str) * (i + 1));
+	if (str == NULL)
+		return (NULL);
 	str = ft_convert(str, value, base);
 	return (str);
 }

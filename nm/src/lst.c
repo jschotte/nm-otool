@@ -1,22 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   lst.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jschotte <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/20 13:18:52 by jschotte          #+#    #+#             */
-/*   Updated: 2017/03/29 20:39:04 by jschotte         ###   ########.fr       */
+/*   Updated: 2017/04/20 13:22:01 by jschotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/nm.h"
 
-t_symbols		*ft_init_env(void)
+t_symbols		*ft_init_env(t_symbols *old)
 {
 	t_symbols	*env;
 
-	env = malloc(sizeof(t_symbols));
+	if (old != NULL)
+		return (old);
+	env = (t_symbols*)malloc(sizeof(t_symbols));
 	env->type = ' ';
 	env->hexvalue = NULL;
 	env->name = NULL;
@@ -24,10 +26,10 @@ t_symbols		*ft_init_env(void)
 	return (env);
 }
 
-void			ft_exit(char *error)
+void			*ft_exit(char *error)
 {
 	ft_putstr_fd(error, 3);
-	exit(0);
+	return (NULL);
 }
 
 void			ft_print_symbols(t_symbols **env)
@@ -35,6 +37,7 @@ void			ft_print_symbols(t_symbols **env)
 	t_symbols	*tmp;
 	t_symbols	*tmp2;
 
+	*env = ft_sort_list(*env);
 	tmp = *env;
 	while (tmp && tmp->name != NULL)
 	{

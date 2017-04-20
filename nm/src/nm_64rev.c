@@ -6,13 +6,13 @@
 /*   By: jschotte <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/14 14:55:38 by jschotte          #+#    #+#             */
-/*   Updated: 2017/04/20 12:47:45 by jschotte         ###   ########.fr       */
+/*   Updated: 2017/04/20 12:48:12 by jschotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/nm.h"
 
-void		ft_print(struct symtab_command *sym, char *ptr, t_symbols **env,
+void		ft_print_rev(struct symtab_command *sym, char *ptr, t_symbols **env,
 		t_count *seg)
 {
 	int				i;
@@ -35,7 +35,7 @@ void		ft_print(struct symtab_command *sym, char *ptr, t_symbols **env,
 	}
 }
 
-t_count		*ft_init_count(t_count *old)
+t_count		*ft_init_count_rev(t_count *old)
 {
 	t_count *env_seg;
 
@@ -60,7 +60,7 @@ t_count		*ft_init_count(t_count *old)
 	return (env_seg);
 }
 
-t_count		*ft_segment(struct load_command *lc, t_count *old)
+t_count		*ft_segment_rev(struct load_command *lc, t_count *old)
 {
 	struct segment_command_64	*sg;
 	struct section_64			*s;
@@ -68,7 +68,7 @@ t_count		*ft_segment(struct load_command *lc, t_count *old)
 	t_count						*env_seg;
 
 	j = 0;
-	env_seg = ft_init_count(old);
+	env_seg = ft_init_count_rev(old);
 	sg = (struct segment_command_64 *)lc;
 	s = (struct section_64 *)
 		((char *)sg + sizeof(struct segment_command_64));
@@ -89,7 +89,7 @@ t_count		*ft_segment(struct load_command *lc, t_count *old)
 	return (env_seg);
 }
 
-void		ft_nm_64(char *ptr, t_symbols **env)
+void		ft_nm_64_rev(char *ptr, t_symbols **env)
 {
 	int						ncmds;
 	int						i;
@@ -105,10 +105,10 @@ void		ft_nm_64(char *ptr, t_symbols **env)
 	while (i < ncmds)
 	{
 		if (lc->cmd == LC_SEGMENT_64)
-			seg = ft_segment(lc, seg);
+			seg = ft_segment_rev(lc, seg);
 		if (lc->cmd == LC_SYMTAB)
 		{
-			ft_print((struct symtab_command *)lc, ptr, env, seg);
+			ft_print_rev((struct symtab_command *)lc, ptr, env, seg);
 			break ;
 		}
 		lc = (void *)lc + lc->cmdsize;

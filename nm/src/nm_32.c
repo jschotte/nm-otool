@@ -6,7 +6,7 @@
 /*   By: jschotte <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/14 14:55:38 by jschotte          #+#    #+#             */
-/*   Updated: 2017/03/29 20:42:19 by jschotte         ###   ########.fr       */
+/*   Updated: 2017/04/20 12:47:56 by jschotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,12 @@ void		ft_print_32(struct symtab_command *sym, char *ptr, t_symbols **env,
 	}
 }
 
-t_count		*ft_init_count_32(t_count *env_seg, t_count *old)
+t_count		*ft_init_count_32(t_count *old)
 {
-	if (old == NULL)
+	t_count *env_seg;
+
+	env_seg = old;
+	if (env_seg == NULL)
 	{
 		env_seg = malloc(sizeof(t_count));
 		if (env_seg == NULL)
@@ -64,7 +67,7 @@ t_count		*ft_segment_32(struct load_command *lc, t_count *old)
 	t_count						*env_seg;
 
 	j = 0;
-	env_seg = ft_init_count_32(env_seg, old);
+	env_seg = ft_init_count_32(old);
 	sg = (struct segment_command *)lc;
 	s = (struct section *)
 		((char *)sg + sizeof(struct segment_command));
@@ -94,10 +97,10 @@ void		ft_nm_32(char *ptr, t_symbols **env)
 	t_count					*seg;
 
 	seg = NULL;
+	i = 0;
 	header = (struct mach_header *)ptr;
 	ncmds = header->ncmds;
 	lc = (void *)ptr + sizeof(*header);
-	i = 0;
 	while (i < ncmds)
 	{
 		if (lc->cmd == LC_SEGMENT)

@@ -6,7 +6,7 @@
 /*   By: jschotte <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/14 14:55:38 by jschotte          #+#    #+#             */
-/*   Updated: 2017/03/29 20:41:38 by jschotte         ###   ########.fr       */
+/*   Updated: 2017/03/30 13:07:20 by jschotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ char	*ft_get_value(long long value, int len)
 			hex = ft_strdup("0000000000000000");
 		tmp = ft_itoa_base_str(value, 16);
 		if (hex == NULL || tmp == NULL)
-			ft_exit("MALLOC error\n");
+			return (ft_exit("MALLOC error\n"));
 		ft_strcpyend(hex, tmp);
 		free(tmp);
 		return (hex);

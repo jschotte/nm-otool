@@ -6,16 +6,17 @@
 #    By: jschotte <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/24 10:08:32 by jschotte          #+#    #+#              #
-#    Updated: 2017/03/29 20:08:04 by jschotte         ###   ########.fr        #
+#    Updated: 2017/04/20 13:33:57 by jschotte         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = ft_nm
 
 SRC = src/nm.c  src/nm_64.c src/nm_32.c src/env.c src/type.c \
-		 src/value.c src/lst.c
+		 src/value.c src/lst.c src/swap.c src/fat.c src/lib.c \
+		 src/nm_64rev.c src/nm_32rev.c src/utilsfat.c
 
-OBJ = nm.o nm_64.o env.o nm_32.o type.o value.o lst.o
+OBJ = nm.o nm_64.o nm_64rev.o nm_32rev.o swap.o env.o nm_32.o type.o value.o lst.o fat.o utilsfat.o lib.o
 
 FLAGS = -Wall -Wextra -Werror
 
@@ -24,8 +25,8 @@ LIB = "libft/libft.a"
 $(NAME):
 		@make -C libft/ fclean && make -C libft/
 		#gcc $(FLAGS) -c $(SRC) 
-		gcc -c $(SRC)
-		gcc -o $(NAME) $(OBJ) $(LIB)
+		gcc -g -c $(SRC)
+		gcc -g -o $(NAME) $(OBJ) $(LIB)
 		mv $(NAME) ..
 
 all: $(NAME) 

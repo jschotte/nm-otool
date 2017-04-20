@@ -1,41 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   nm_64.c                                            :+:      :+:    :+:   */
+/*   nm_32.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jschotte <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/14 14:55:38 by jschotte          #+#    #+#             */
-/*   Updated: 2017/04/20 12:47:45 by jschotte         ###   ########.fr       */
+/*   Updated: 2017/04/20 13:00:13 by jschotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/nm.h"
 
-void		ft_print(struct symtab_command *sym, char *ptr, t_symbols **env,
-		t_count *seg)
+void		ft_print_32_rev(struct symtab_command *sym, char *ptr,
+		t_symbols **env, t_count *seg)
 {
 	int				i;
 	char			*stringtable;
-	struct nlist_64 *array;
+	struct nlist	*array;
 	t_symbols		*new;
 
 	array = (void *)ptr + sym->symoff;
 	stringtable = (void *)ptr + sym->stroff;
 	i = 0;
-	while (i < sym->nsyms)
+	while (i < swapint32(sym->nsyms))
 	{
 		new = ft_create_elem(ft_strdup(stringtable + array[i].n_un.n_strx),
-				ft_get_value(array[i].n_value, 16),
-				ft_get_type_v2(array[i].n_type,
-					array[i].n_sect,
+				ft_get_value(array[i].n_value, 8),
+				ft_get_type_v2(array[i].n_type, array[i].n_sect,
 					array[i].n_value, seg));
 		ft_pushback(env, new);
 		i++;
 	}
 }
 
-t_count		*ft_init_count(t_count *old)
+t_count		*ft_init_count_32_rev(t_count *old)
 {
 	t_count *env_seg;
 
@@ -60,19 +59,19 @@ t_count		*ft_init_count(t_count *old)
 	return (env_seg);
 }
 
-t_count		*ft_segment(struct load_command *lc, t_count *old)
+t_count		*ft_segment_32_rev(struct load_command *lc, t_count *old)
 {
-	struct segment_command_64	*sg;
-	struct section_64			*s;
+	struct segment_command		*sg;
+	struct section				*s;
 	int							j;
 	t_count						*env_seg;
 
 	j = 0;
-	env_seg = ft_init_count(old);
-	sg = (struct segment_command_64 *)lc;
-	s = (struct section_64 *)
-		((char *)sg + sizeof(struct segment_command_64));
-	while (j < sg->nsects)
+	env_seg = ft_init_count_32_rev(old);
+	sg = (struct segment_command *)lc;
+	s = (struct section *)
+		((char *)sg + sizeof(struct segment_command));
+	while (j < swapint32(sg->nsects))
 	{
 		if (ft_strcmp((s + j)->sectname, SECT_TEXT) == 0 &&
 				ft_strcmp((s + j)->segname, SEG_TEXT) == 0)
@@ -89,29 +88,29 @@ t_count		*ft_segment(struct load_command *lc, t_count *old)
 	return (env_seg);
 }
 
-void		ft_nm_64(char *ptr, t_symbols **env)
+void		ft_nm_32_rev(char *ptr, t_symbols **env)
 {
 	int						ncmds;
 	int						i;
-	struct mach_header_64	*header;
+	struct mach_header		*header;
 	struct load_command		*lc;
 	t_count					*seg;
 
 	seg = NULL;
-	header = (struct mach_header_64 *)ptr;
-	ncmds = header->ncmds;
 	i = 0;
+	header = (struct mach_header *)ptr;
+	ncmds = swapint32(header->ncmds);
 	lc = (void *)ptr + sizeof(*header);
 	while (i < ncmds)
 	{
-		if (lc->cmd == LC_SEGMENT_64)
-			seg = ft_segment(lc, seg);
-		if (lc->cmd == LC_SYMTAB)
+		if (swapint32(lc->cmd) == LC_SEGMENT)
+			seg = ft_segment_32_rev(lc, seg);
+		if (swapint32(lc->cmd) == LC_SYMTAB)
 		{
-			ft_print((struct symtab_command *)lc, ptr, env, seg);
+			ft_print_32_rev((struct symtab_command *)lc, ptr, env, seg);
 			break ;
 		}
-		lc = (void *)lc + lc->cmdsize;
+		lc = (void *)lc + (swapint32(lc->cmdsize));
 		i++;
 	}
 	free(seg);

@@ -6,7 +6,7 @@
 /*   By: jschotte <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/20 13:18:52 by jschotte          #+#    #+#             */
-/*   Updated: 2017/03/29 20:41:25 by jschotte         ###   ########.fr       */
+/*   Updated: 2017/04/20 13:19:56 by jschotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,12 +88,15 @@ int				ft_already_in(t_symbols **env, char *str, char *hex)
 
 void			ft_pushback(t_symbols **env, t_symbols *new)
 {
-	if (new->hexvalue == NULL)
+	if (new && (new->hexvalue == NULL || new->name == NULL))
 		ft_exit("MALLOC error\n");
 	if (new != NULL)
 	{
 		if (!((*env)->name))
+		{
+			free(*env);
 			*env = new;
+		}
 		else
 		{
 			if (ft_already_in(env, new->name, new->hexvalue) == 0)
