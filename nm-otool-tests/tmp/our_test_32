@@ -1,0 +1,11 @@
+00001000 T __mh_execute_header
+00001f20 T _global_function
+0000200c b _global_function.local_static_var
+00002008 d _global_function.local_static_var_init
+00001f50 T _global_function2
+00002014 S _global_var
+00002004 D _global_var_init
+00001f80 T _main
+00001f70 T _non_mangled_function
+00002010 b _static_var
+         U dyld_stub_binder
