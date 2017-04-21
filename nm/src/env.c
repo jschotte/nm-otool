@@ -6,7 +6,7 @@
 /*   By: jschotte <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/20 13:18:52 by jschotte          #+#    #+#             */
-/*   Updated: 2017/04/20 13:19:56 by jschotte         ###   ########.fr       */
+/*   Updated: 2017/04/21 18:20:56 by jschotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ t_symbols		*ft_create_elem(char *name, char *value, char c)
 
 	if (c != ' ')
 	{
-		new = malloc(sizeof(t_symbols));
+		new = (t_symbols*)malloc(sizeof(t_symbols));
 		if (new == NULL)
 			ft_exit("MALLOC error\n");
 		new->type = c;

@@ -6,7 +6,7 @@
 /*   By: jschotte <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/20 13:18:52 by jschotte          #+#    #+#             */
-/*   Updated: 2017/04/20 13:22:01 by jschotte         ###   ########.fr       */
+/*   Updated: 2017/04/21 18:14:27 by jschotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ t_symbols		*ft_init_env(t_symbols *old)
 	if (old != NULL)
 		return (old);
 	env = (t_symbols*)malloc(sizeof(t_symbols));
+	if (env == NULL)
+		ft_exit("Malloc error\n");
 	env->type = ' ';
 	env->hexvalue = NULL;
 	env->name = NULL;
@@ -28,8 +30,8 @@ t_symbols		*ft_init_env(t_symbols *old)
 
 void			*ft_exit(char *error)
 {
-	ft_putstr_fd(error, 3);
-	return (NULL);
+	ft_putstr_fd(error, 2);
+	exit(1);
 }
 
 void			ft_print_symbols(t_symbols **env)
@@ -53,7 +55,6 @@ void			ft_print_symbols(t_symbols **env)
 			else
 				ft_printf("%s %c %s\n", tmp->hexvalue, tmp->type, tmp->name);
 		}
-		free(tmp->name);
 		free(tmp->hexvalue);
 		free(tmp);
 		tmp = tmp2;

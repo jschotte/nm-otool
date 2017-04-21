@@ -6,7 +6,7 @@
 #    By: jschotte <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/24 10:08:32 by jschotte          #+#    #+#              #
-#    Updated: 2017/04/20 13:33:57 by jschotte         ###   ########.fr        #
+#    Updated: 2017/04/21 17:27:41 by jschotte         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,10 +24,8 @@ LIB = "libft/libft.a"
 
 $(NAME):
 		@make -C libft/ fclean && make -C libft/
-		#gcc $(FLAGS) -c $(SRC) 
-		gcc -g -c $(SRC)
-		gcc -g -o $(NAME) $(OBJ) $(LIB)
-		mv $(NAME) ..
+		gcc $(FLAGS) -c $(SRC) 
+		gcc -o $(NAME) $(OBJ) $(LIB)
 
 all: $(NAME) 
 
@@ -37,7 +35,7 @@ clean:
 
 fclean: clean
 		@make -C libft/ fclean
-		rm -rf ../$(NAME)
+		rm -rf $(NAME)
 
 re: fclean all
 

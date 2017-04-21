@@ -6,7 +6,7 @@
 /*   By: jschotte <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/14 14:55:38 by jschotte          #+#    #+#             */
-/*   Updated: 2017/04/20 12:48:12 by jschotte         ###   ########.fr       */
+/*   Updated: 2017/04/21 10:22:02 by jschotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ void		ft_print_rev(struct symtab_command *sym, char *ptr, t_symbols **env,
 	struct nlist_64 *array;
 	t_symbols		*new;
 
-	array = (void *)ptr + sym->symoff;
-	stringtable = (void *)ptr + sym->stroff;
+	array = (void *)ptr + swapint32(sym->symoff);
+	stringtable = (void *)ptr + swapint32(sym->stroff);
 	i = 0;
-	while (i < sym->nsyms)
+	while (i < (int)swapint32(sym->nsyms))
 	{
-		new = ft_create_elem(ft_strdup(stringtable + array[i].n_un.n_strx),
+		new = ft_create_elem(stringtable + swapint32(array[i].n_un.n_strx),
 				ft_get_value(array[i].n_value, 16),
 				ft_get_type_v2(array[i].n_type,
 					array[i].n_sect,
@@ -72,7 +72,7 @@ t_count		*ft_segment_rev(struct load_command *lc, t_count *old)
 	sg = (struct segment_command_64 *)lc;
 	s = (struct section_64 *)
 		((char *)sg + sizeof(struct segment_command_64));
-	while (j < sg->nsects)
+	while (j < (int)swapint32(sg->nsects))
 	{
 		if (ft_strcmp((s + j)->sectname, SECT_TEXT) == 0 &&
 				ft_strcmp((s + j)->segname, SEG_TEXT) == 0)
@@ -99,19 +99,19 @@ void		ft_nm_64_rev(char *ptr, t_symbols **env)
 
 	seg = NULL;
 	header = (struct mach_header_64 *)ptr;
-	ncmds = header->ncmds;
+	ncmds = swapint32(header->ncmds);
 	i = 0;
 	lc = (void *)ptr + sizeof(*header);
 	while (i < ncmds)
 	{
-		if (lc->cmd == LC_SEGMENT_64)
+		if (swapint32(lc->cmd) == LC_SEGMENT_64)
 			seg = ft_segment_rev(lc, seg);
-		if (lc->cmd == LC_SYMTAB)
+		if (swapint32(lc->cmd) == LC_SYMTAB)
 		{
 			ft_print_rev((struct symtab_command *)lc, ptr, env, seg);
 			break ;
 		}
-		lc = (void *)lc + lc->cmdsize;
+		lc = (void *)lc + swapint32(lc->cmdsize);
 		i++;
 	}
 	free(seg);

@@ -6,7 +6,7 @@
 /*   By: jschotte <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/14 14:55:38 by jschotte          #+#    #+#             */
-/*   Updated: 2017/04/20 12:47:45 by jschotte         ###   ########.fr       */
+/*   Updated: 2017/04/21 10:19:01 by jschotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ void		ft_print(struct symtab_command *sym, char *ptr, t_symbols **env,
 	array = (void *)ptr + sym->symoff;
 	stringtable = (void *)ptr + sym->stroff;
 	i = 0;
-	while (i < sym->nsyms)
+	while (i < (int)sym->nsyms)
 	{
-		new = ft_create_elem(ft_strdup(stringtable + array[i].n_un.n_strx),
+		new = ft_create_elem(stringtable + array[i].n_un.n_strx,
 				ft_get_value(array[i].n_value, 16),
 				ft_get_type_v2(array[i].n_type,
 					array[i].n_sect,
@@ -72,7 +72,7 @@ t_count		*ft_segment(struct load_command *lc, t_count *old)
 	sg = (struct segment_command_64 *)lc;
 	s = (struct section_64 *)
 		((char *)sg + sizeof(struct segment_command_64));
-	while (j < sg->nsects)
+	while (j < (int)sg->nsects)
 	{
 		if (ft_strcmp((s + j)->sectname, SECT_TEXT) == 0 &&
 				ft_strcmp((s + j)->segname, SEG_TEXT) == 0)

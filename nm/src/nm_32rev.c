@@ -6,7 +6,7 @@
 /*   By: jschotte <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/14 14:55:38 by jschotte          #+#    #+#             */
-/*   Updated: 2017/04/20 13:00:13 by jschotte         ###   ########.fr       */
+/*   Updated: 2017/04/21 10:22:18 by jschotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,12 @@ void		ft_print_32_rev(struct symtab_command *sym, char *ptr,
 	struct nlist	*array;
 	t_symbols		*new;
 
-	array = (void *)ptr + sym->symoff;
-	stringtable = (void *)ptr + sym->stroff;
+	array = (void *)ptr + swapint32(sym->symoff);
+	stringtable = (void *)ptr + swapint32(sym->stroff);
 	i = 0;
-	while (i < swapint32(sym->nsyms))
+	while (i < (int)swapint32(sym->nsyms))
 	{
-		new = ft_create_elem(ft_strdup(stringtable + array[i].n_un.n_strx),
+		new = ft_create_elem(stringtable + swapint32(array[i].n_un.n_strx),
 				ft_get_value(array[i].n_value, 8),
 				ft_get_type_v2(array[i].n_type, array[i].n_sect,
 					array[i].n_value, seg));
@@ -71,7 +71,7 @@ t_count		*ft_segment_32_rev(struct load_command *lc, t_count *old)
 	sg = (struct segment_command *)lc;
 	s = (struct section *)
 		((char *)sg + sizeof(struct segment_command));
-	while (j < swapint32(sg->nsects))
+	while (j < (int)swapint32(sg->nsects))
 	{
 		if (ft_strcmp((s + j)->sectname, SECT_TEXT) == 0 &&
 				ft_strcmp((s + j)->segname, SEG_TEXT) == 0)

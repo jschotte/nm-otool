@@ -6,7 +6,7 @@
 /*   By: jschotte <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/13 14:50:12 by jschotte          #+#    #+#             */
-/*   Updated: 2017/04/20 15:08:03 by jschotte         ###   ########.fr       */
+/*   Updated: 2017/04/21 18:13:59 by jschotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,23 +22,23 @@ int		ft_nm(char *ptr, char *str, t_symbols *en)
 {
 	int			magic_number;
 	t_symbols	*env;
-
+	
 	if ((env = ft_init_env(en)) == NULL)
-		return (ft_error("MALLOC error", str));
+		ft_exit("MALLOC error");
 	magic_number = *(int *)ptr;
-	if (magic_number == MH_MAGIC_64)
+	if (magic_number == (int)MH_MAGIC_64)
 		ft_nm_64(ptr, &env);
-	else if (magic_number == MH_MAGIC)
+	else if (magic_number == (int)MH_MAGIC)
 		ft_nm_32(ptr, &env);
-	else if (magic_number == MH_CIGAM_64)
+	else if (magic_number == (int)MH_CIGAM_64)
 		ft_nm_64_rev(ptr, &env);
-	else if (magic_number == MH_CIGAM)
+	else if (magic_number == (int)MH_CIGAM)
 		ft_nm_32_rev(ptr, &env);
-	else if (magic_number == FAT_MAGIC)
-		ft_fat(ptr, &env, 0, str);
-	else if (magic_number == FAT_CIGAM)
-		ft_fat(ptr, &env, 1, str);
-	else if (magic_number == MAGIC_ARCH)
+	else if (magic_number == (int)FAT_MAGIC)
+		ft_fat(ptr, &env, str);
+	else if (magic_number == (int)FAT_CIGAM)
+		ft_fat(ptr, &env, str);
+	else if (magic_number == (int)MAGIC_ARCH)
 		ft_lib(ptr, &env, str);
 	else
 		return (ft_error("The file was not a valid object file.", str));

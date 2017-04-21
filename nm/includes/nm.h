@@ -6,7 +6,7 @@
 /*   By: jschotte <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/13 14:51:08 by jschotte          #+#    #+#             */
-/*   Updated: 2017/04/20 10:11:15 by jschotte         ###   ########.fr       */
+/*   Updated: 2017/04/21 10:15:38 by jschotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,7 @@ void					ft_nm_64(char *ptr, t_symbols **env);
 void					ft_nm_32(char *ptr, t_symbols **env);
 void					ft_nm_64_rev(char *ptr, t_symbols **env);
 void					ft_nm_32_rev(char *ptr, t_symbols **env);
-void					ft_fat(char *ptr, t_symbols **env, int reverse,
-	char *str);
+void					ft_fat(char *ptr, t_symbols **env, char *str);
 void					ft_lib(char *ptr, t_symbols **env, char *str);
 
 struct mach_header		*swap_mach_header(struct mach_header *header);
