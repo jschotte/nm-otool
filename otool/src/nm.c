@@ -6,7 +6,7 @@
 /*   By: jschotte <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/13 14:50:12 by jschotte          #+#    #+#             */
-/*   Updated: 2017/04/21 16:22:46 by jschotte         ###   ########.fr       */
+/*   Updated: 2017/04/24 10:41:40 by jschotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,10 @@ int		ft_nm(char *ptr, char *str)
 	int			magic_number;
 
 	magic_number = *(int *)ptr;
-	if (magic_number == (int)MH_MAGIC_64)
-		ft_nm_64(ptr, str);
-	else if (magic_number == (int)MH_MAGIC)
-		ft_nm_32(ptr, str);
-	else if (magic_number == (int)MH_CIGAM_64)
-		ft_nm_64_rev(ptr, str);
-	else if (magic_number == (int)MH_CIGAM)
-		ft_nm_32_rev(ptr, str);
+	if (magic_number == (int)MH_MAGIC_64 || magic_number == (int)MH_CIGAM_64)
+		ft_nm_64(ptr);
+	else if (magic_number == (int)MH_MAGIC || magic_number == (int)MH_CIGAM)
+		ft_nm_32(ptr);
 	else if (magic_number == (int)FAT_MAGIC)
 		ft_fat(ptr, str);
 	else if (magic_number == (int)FAT_CIGAM)

@@ -6,7 +6,7 @@
 /*   By: jschotte <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/13 14:50:12 by jschotte          #+#    #+#             */
-/*   Updated: 2017/04/21 18:13:59 by jschotte         ###   ########.fr       */
+/*   Updated: 2017/04/24 09:22:36 by jschotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int		ft_nm(char *ptr, char *str, t_symbols *en)
 {
 	int			magic_number;
 	t_symbols	*env;
-	
+
 	if ((env = ft_init_env(en)) == NULL)
 		ft_exit("MALLOC error");
 	magic_number = *(int *)ptr;

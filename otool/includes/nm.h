@@ -6,7 +6,7 @@
 /*   By: jschotte <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/13 14:51:08 by jschotte          #+#    #+#             */
-/*   Updated: 2017/04/21 16:26:46 by jschotte         ###   ########.fr       */
+/*   Updated: 2017/04/24 10:41:30 by jschotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,8 @@ typedef struct			s_fat
 }						t_fat;
 
 int						ft_nm(char *ptr, char *str);
-void					ft_nm_64(char *ptr, char *str);
-void					ft_nm_32(char *ptr, char *str);
-void					ft_nm_64_rev(char *ptr, char *str);
-void					ft_nm_32_rev(char *ptr, char *str);
+void					ft_nm_64(char *ptr);
+void					ft_nm_32(char *ptr);
 void					ft_fat(char *ptr, char *str);
 void					ft_lib(char *ptr, char *str);
 
@@ -55,6 +53,6 @@ t_fat					*ft_init_fat(void);
 t_fat					*ft_create_elem_fat(char *ptr, char *cpuname);
 void					ft_pushback_fat(t_fat **env, t_fat *new);
 void					freefat(t_fat **fat);
-char					*ft_gettext(unsigned int nb);
+void					ft_gettext(unsigned int nb);
 
 #endif

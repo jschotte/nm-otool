@@ -6,18 +6,40 @@
 /*   By: jschotte <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/03/14 14:55:38 by jschotte          #+#    #+#             */
-/*   Updated: 2017/04/21 16:08:31 by jschotte         ###   ########.fr       */
+/*   Updated: 2017/04/24 10:40:41 by jschotte         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/nm.h"
 
-char		*ft_gettext(unsigned int nb)
+void		ft_gettext(unsigned int nb)
 {
+	char	*str;
+
 	if (nb <= 2147483648)
-		return (ft_itoa_base_str(nb, 16));
+		str = ft_itoa_base_str(nb, 16);
 	else
-		return (ft_itoa_base_str(nb - 4294967040, 16));
+		str = ft_itoa_base_str(nb - 4294967040, 16);
+	ft_printf("%02s", str);
+	free(str);
+}
+
+void		ft_print_hex(unsigned int nb)
+{
+	char	*str;
+
+	str = ft_itoa_base_str(nb, 16);
+	ft_printf("00000001%08s\t", str);
+	free(str);
+}
+
+void		ft_print_hex2(unsigned int nb)
+{
+	char	*str;
+
+	str = ft_itoa_base_str(nb, 16);
+	ft_printf(" \n00000001%08s\t", str);
+	free(str);
 }
 
 void		ft_segment(struct load_command *lc, char *ptr, int i, int j)
@@ -32,23 +54,22 @@ void		ft_segment(struct load_command *lc, char *ptr, int i, int j)
 		if (ft_strcmp((s + j)->sectname, SECT_TEXT) == 0 &&
 				ft_strcmp((s + j)->segname, SEG_TEXT) == 0)
 		{
-			ft_printf("00000001%08s\t", ft_itoa_base_str((s + j)->offset, 16));
-			while (i < (s + j)->size)
+			ft_print_hex((s + j)->offset);
+			while ((uint64_t)i < (s + j)->size)
 			{
 				if (i % 16 != 0)
 					ft_putchar(' ');
-				ft_printf("%02s", ft_gettext((ptr + (s + j)->offset)[i]));
+				ft_gettext((ptr + (s + j)->offset)[i]);
 				i++;
-				if (i % 16 == 0 && i < (s + j)->size)
-					ft_printf(" \n00000001%08s\t",
-							ft_itoa_base_str((s + j)->offset + i, 16));
+				if (i % 16 == 0 && (uint64_t)i < (s + j)->size)
+					ft_print_hex2((s + j)->offset + i);
 			}
 		}
 		j++;
 	}
 }
 
-void		ft_nm_64(char *ptr, char *str)
+void		ft_nm_64(char *ptr)
 {
 	int						ncmds;
 	int						i;
